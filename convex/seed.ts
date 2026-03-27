@@ -1,4 +1,34 @@
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
+
+export const checkSeedData = query({
+  args: {},
+  handler: async (ctx) => {
+    const categories = await ctx.db.query("categories").collect();
+    const agents = await ctx.db.query("agents").collect();
+    const slaPolicies = await ctx.db.query("slaPolicies").collect();
+    const tags = await ctx.db.query("tags").collect();
+    const tickets = await ctx.db.query("tickets").collect();
+    return {
+      categories: categories.length,
+      agents: agents.map(a => ({ id: a._id, dept: a.department, userId: a.userId })),
+      slaPolicies: slaPolicies.length,
+      tags: tags.length,
+      tickets: tickets.length,
+    };
+  },
+});
+
+export const seedAgents = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const existing = await ctx.db.query("agents").take(1);
+    if (existing.length > 0) return;
+    const now = Date.now();
+    await ctx.db.insert("agents", { userId: "user_3BVWDdT9lDOiybeERx2eddBQZTB", department: "Admin", specialties: ["system-administration", "security", "compliance"], maxTicketLoad: 20, currentTicketCount: 0, availabilityStatus: "Available", ticketsResolved: 0, isActive: true, createdAt: now });
+    await ctx.db.insert("agents", { userId: "user_3BVrrXWlD8jB6WASwzhLALgoPSC", department: "Team Lead", specialties: ["networking", "hardware", "team-management"], maxTicketLoad: 15, currentTicketCount: 0, availabilityStatus: "Available", ticketsResolved: 0, isActive: true, createdAt: now });
+    await ctx.db.insert("agents", { userId: "user_3BVrrbfI7htSgPf3LXWHm4tooS2", department: "IT Support", specialties: ["software", "windows", "printers"], maxTicketLoad: 10, currentTicketCount: 0, availabilityStatus: "Available", ticketsResolved: 0, isActive: true, createdAt: now });
+  },
+});
 
 export const seedDatabase = mutation({
   args: {},

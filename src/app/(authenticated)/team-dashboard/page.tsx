@@ -20,7 +20,7 @@ export default function TeamDashboardPage() {
       </div>
       <h2 className="text-lg font-semibold">Agent Workload</h2>
       <Table><TableHeader><TableRow><TableHead>Agent</TableHead><TableHead>Department</TableHead><TableHead>Tickets</TableHead><TableHead>Status</TableHead></TableRow></TableHeader>
-        <TableBody>{stats.agents.map((a: any) => (<TableRow key={a._id}><TableCell className="font-mono text-sm">{a.userId.slice(0, 8)}</TableCell><TableCell>{a.department}</TableCell><TableCell>{a.currentTicketCount}/{a.maxTicketLoad}</TableCell><TableCell><Badge variant="outline">{a.availabilityStatus}</Badge></TableCell></TableRow>))}</TableBody></Table>
+        <TableBody>{stats.agents.map((a: any) => (<TableRow key={a._id}><TableCell className="text-sm font-medium">{a.department} Agent</TableCell><TableCell>{a.department}</TableCell><TableCell>{a.currentTicketCount}/{a.maxTicketLoad}</TableCell><TableCell><Badge variant="outline">{a.availabilityStatus}</Badge></TableCell></TableRow>))}</TableBody></Table>
     </div>
   );
 }

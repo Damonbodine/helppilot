@@ -32,7 +32,8 @@ export function TicketsTable({ status, assignedAgentId, unassignedOnly }: Ticket
   const getAgentName = (id: string | undefined) => {
     if (!id) return "Unassigned";
     const agent = agents?.find((a) => a._id === id);
-    return agent?.userId?.slice(0, 8) ?? "—";
+    if (!agent) return "—";
+    return `${agent.department} Agent`;
   };
 
   return (
