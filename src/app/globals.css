@@ -4,35 +4,35 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 270 100% 99%;
-  --foreground: 240 17% 12%;
+  --background: 220 14% 96%;
+  --foreground: 220 40% 10%;
   --card: 0 0% 100%;
-  --card-foreground: 240 17% 12%;
+  --card-foreground: 220 40% 10%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 17% 12%;
-  --primary: 243 76% 58%;
+  --popover-foreground: 220 40% 10%;
+  --primary: 0 0% 15%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 160 96% 30%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 260 36% 95%;
-  --muted-foreground: 244 10% 30%;
-  --accent: 260 100% 97%;
-  --accent-foreground: 240 17% 12%;
-  --destructive: 0 73% 41%;
+  --secondary: 220 14% 90%;
+  --secondary-foreground: 220 40% 10%;
+  --muted: 220 14% 92%;
+  --muted-foreground: 220 10% 45%;
+  --accent: 220 14% 90%;
+  --accent-foreground: 220 40% 10%;
+  --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 100%;
-  --border: 252 14% 81%;
-  --input: 252 14% 81%;
-  --ring: 243 76% 58%;
+  --border: 220 14% 92%;
+  --input: 220 14% 92%;
+  --ring: 0 0% 15%;
   --radius: 0.5rem;
-  --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 240 17% 12%;
-  --sidebar-primary: 243 76% 58%;
+  --sidebar-background: 220 40% 10%;
+  --sidebar-foreground: 220 10% 90%;
+  --sidebar-primary: 0 0% 15%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 260 100% 97%;
-  --sidebar-accent-foreground: 240 17% 12%;
-  --sidebar-border: 252 14% 81%;
-  --sidebar-ring: 243 76% 58%;
-  --chart-1: 243 76% 58%;
+  --sidebar-accent: 220 40% 15%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 220 40% 12%;
+  --sidebar-ring: 0 0% 15%;
+  --chart-1: 0 0% 15%;
   --chart-2: 160 96% 30%;
   --chart-3: 38 92% 50%;
   --chart-4: 217 91% 60%;
@@ -40,34 +40,34 @@
 }
 
 .dark {
-  --background: 240 17% 12%;
-  --foreground: 270 100% 99%;
-  --card: 240 12% 16%;
-  --card-foreground: 270 100% 99%;
-  --popover: 240 12% 16%;
-  --popover-foreground: 270 100% 99%;
-  --primary: 243 76% 58%;
+  --background: 220 14% 96%;
+  --foreground: 220 40% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 40% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 40% 10%;
+  --primary: 0 0% 15%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 160 96% 30%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 240 12% 20%;
-  --muted-foreground: 252 14% 81%;
-  --accent: 240 12% 20%;
-  --accent-foreground: 270 100% 99%;
-  --destructive: 0 73% 41%;
+  --secondary: 220 14% 90%;
+  --secondary-foreground: 220 40% 10%;
+  --muted: 220 14% 92%;
+  --muted-foreground: 220 10% 45%;
+  --accent: 220 14% 90%;
+  --accent-foreground: 220 40% 10%;
+  --destructive: 0 70% 50%;
   --destructive-foreground: 0 0% 100%;
-  --border: 240 12% 25%;
-  --input: 240 12% 25%;
-  --ring: 243 76% 58%;
-  --sidebar-background: 240 12% 14%;
-  --sidebar-foreground: 270 100% 99%;
-  --sidebar-primary: 243 76% 58%;
+  --border: 220 14% 92%;
+  --input: 220 14% 92%;
+  --ring: 0 0% 15%;
+  --sidebar-background: 220 40% 10%;
+  --sidebar-foreground: 220 10% 90%;
+  --sidebar-primary: 0 0% 15%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 240 12% 20%;
-  --sidebar-accent-foreground: 270 100% 99%;
-  --sidebar-border: 240 12% 25%;
-  --sidebar-ring: 243 76% 58%;
-  --chart-1: 243 76% 65%;
+  --sidebar-accent: 220 40% 15%;
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 220 40% 12%;
+  --sidebar-ring: 0 0% 15%;
+  --chart-1: 0 0% 15%;
   --chart-2: 160 80% 45%;
   --chart-3: 38 92% 55%;
   --chart-4: 217 91% 65%;
@@ -120,4 +120,13 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+/* Elegant SaaS Refinements */
+.card, [data-sidebar="sidebar"] {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+  background-color: hsl(0 0% 100%) !important;
+}
+table th, table td {
+  border-bottom: 1px solid hsl(var(--border)) !important;
 }
