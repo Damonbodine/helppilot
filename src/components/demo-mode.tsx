@@ -66,25 +66,25 @@ const HELPPILOT_SCENARIO: DemoScenario = {
       actionLabel: "Open tickets",
     },
     {
-      id: "ticket-detail",
-      title: "Review a live support ticket",
+      id: "ticket-create",
+      title: "Open the new ticket form",
       body:
-        "A ticket record brings together status, priority, category, SLA timing, and the full support conversation in one place.",
+        "The ticket form captures the issue summary, description, category, and priority so staff can get help routed quickly.",
       whyItMatters:
-        "This is where the app proves it can support real ticket execution rather than a simple list of requests.",
-      routePrefix: "/tickets/",
-      target: "[data-demo='ticket-detail']",
-      actionTarget: "[data-demo='primary-ticket-row']",
+        "Even if a team starts with no open tickets, the walkthrough should still prove the intake workflow is ready to use.",
+      routePrefix: "/tickets/new",
+      target: "[data-demo='ticket-create']",
+      actionTarget: "[data-demo='primary-new-ticket']",
     },
     {
-      id: "ticket-tools",
-      title: "Use the response and resolution tools",
+      id: "ticket-fields",
+      title: "Review the request fields and routing controls",
       body:
-        "Support staff can work from triage suggestions, reply drafting, timeline history, and SLA context without leaving the ticket.",
+        "The issue details and category-driven priority controls give a small support team enough structure to triage work consistently.",
       whyItMatters:
-        "This is the strongest proof point that the app helps a lean team resolve issues faster, not just document them.",
-      routePrefix: "/tickets/",
-      target: "[data-demo='ticket-tools']",
+        "This is the proof point for practical request intake, even before the team has a large ticket backlog.",
+      routePrefix: "/tickets/new",
+      target: "[data-demo='ticket-fields']",
     },
   ],
 };

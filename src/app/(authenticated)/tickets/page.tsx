@@ -21,7 +21,14 @@ export default function TicketsPage() {
           <h1 className="text-2xl font-bold">Tickets</h1>
           <p className="text-sm text-muted-foreground">Manage all support tickets</p>
         </div>
-        <Link href={withPreservedDemoQuery("/tickets/new", searchParams)} className="inline-flex items-center gap-2 rounded-lg bg-primary px-2.5 h-8 text-sm font-medium text-primary-foreground hover:bg-primary/80"><Plus className="h-4 w-4 mr-2" />New Ticket</Link>
+        <Link
+          href={withPreservedDemoQuery("/tickets/new", searchParams)}
+          data-demo="primary-new-ticket"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-2.5 h-8 text-sm font-medium text-primary-foreground hover:bg-primary/80"
+        >
+          <Plus className="h-4 w-4 mr-2" />
+          New Ticket
+        </Link>
       </div>
       <FilterBar
         statusFilter={statusFilter}
