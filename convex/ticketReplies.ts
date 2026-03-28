@@ -39,6 +39,15 @@ export const create = mutation({
   },
 });
 
+export const getConversation = query({
+  args: { ticketId: v.id("tickets") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+    return await ctx.db.query("ticketReplies").withIndex("by_ticketId", (q) => q.eq("ticketId", args.ticketId)).collect();
+  },
+});
+
 export const update = mutation({
   args: { replyId: v.id("ticketReplies"), content: v.string() },
   handler: async (ctx, args) => {

@@ -11,6 +11,10 @@ import { SlaCountdown } from "@/components/sla-countdown";
 import { TicketTimeline } from "@/components/ticket-timeline";
 import { TicketReplyForm } from "@/components/ticket-reply-form";
 import { LoadingSkeleton } from "@/components/loading-skeleton";
+import { AiTriageSuggestions } from "@/components/ai-triage-suggestions";
+import { ResolutionSuggester } from "@/components/resolution-suggester";
+import { AutoResponseDrafter } from "@/components/auto-response-drafter";
+import { KbArticleGenerator } from "@/components/kb-article-generator";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -42,6 +46,9 @@ export default function TicketDetailPage() {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      {isStaff && (ticket.status === "Open" || ticket.status === "Triaged") && (
+        <AiTriageSuggestions ticketId={ticketId} title={ticket.title} description={ticket.description} />
+      )}
       <Card>
         <CardHeader>
           <div className="flex items-start justify-between">
@@ -85,6 +92,15 @@ export default function TicketDetailPage() {
           )}
         </CardContent>
       </Card>
+      {isStaff && ticket.status !== "Closed" && (
+        <div className="grid gap-4 md:grid-cols-2">
+          <ResolutionSuggester ticketId={ticketId} />
+          <AutoResponseDrafter ticketId={ticketId} />
+        </div>
+      )}
+      {isStaff && ticket.status === "Resolved" && (
+        <KbArticleGenerator ticketId={ticketId} categoryId={ticket.categoryId} />
+      )}
       <div>
         <h2 className="text-lg font-semibold mb-4">Replies</h2>
         <TicketTimeline ticketId={ticketId} />

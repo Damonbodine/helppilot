@@ -216,6 +216,19 @@ export const updateStatus = mutation({
   },
 });
 
+export const searchResolved = query({
+  args: { search: v.string() },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) return [];
+    const resolved = await ctx.db.query("tickets").withIndex("by_status", (q) => q.eq("status", "Resolved")).collect();
+    const closed = await ctx.db.query("tickets").withIndex("by_status", (q) => q.eq("status", "Closed")).collect();
+    const all = [...resolved, ...closed];
+    const s = args.search.toLowerCase();
+    return all.filter((t) => t.title.toLowerCase().includes(s) || t.description.toLowerCase().includes(s)).slice(0, 10);
+  },
+});
+
 export const assign = mutation({
   args: {
     ticketId: v.id("tickets"),
