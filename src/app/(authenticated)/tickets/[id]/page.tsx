@@ -45,7 +45,7 @@ export default function TicketDetailPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl">
+    <div className="space-y-6 max-w-4xl" data-demo="ticket-detail">
       {isStaff && (ticket.status === "Open" || ticket.status === "Triaged") && (
         <AiTriageSuggestions ticketId={ticketId} title={ticket.title} description={ticket.description} />
       )}
@@ -93,7 +93,7 @@ export default function TicketDetailPage() {
         </CardContent>
       </Card>
       {isStaff && ticket.status !== "Closed" && (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2" data-demo="ticket-tools">
           <ResolutionSuggester ticketId={ticketId} />
           <AutoResponseDrafter ticketId={ticketId} />
         </div>

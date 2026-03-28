@@ -4,6 +4,7 @@ import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
+import { DemoMode } from "@/components/demo-mode";
 
 export function AuthenticatedShell({
   children,
@@ -30,6 +31,7 @@ export function AuthenticatedShell({
       <SidebarInset>
         <main className="flex-1 p-6">
           {children}
+          <DemoMode />
         </main>
       </SidebarInset>
     </SidebarProvider>

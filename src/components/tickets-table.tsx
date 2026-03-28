@@ -11,6 +11,8 @@ import { EmptyState } from "./empty-state";
 import { useRouter } from "next/navigation";
 import { Ticket } from "lucide-react";
 import { Id } from "../../convex/_generated/dataModel";
+import { useSearchParams } from "next/navigation";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 type TicketsTableProps = {
   status?: "Open" | "Triaged" | "InProgress" | "OnHold" | "Resolved" | "Closed";
@@ -24,6 +26,7 @@ export function TicketsTable({ status, assignedAgentId, unassignedOnly }: Ticket
   const categories = useQuery(api.categories.list, user === undefined ? "skip" : {});
   const agents = useQuery(api.agents.list, user === undefined ? "skip" : {});
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   if (tickets === undefined) return <LoadingSkeleton type="table" />;
   if (tickets.length === 0) return <EmptyState icon={Ticket} title="No tickets found" description="No tickets match the current filters." />;
@@ -37,7 +40,7 @@ export function TicketsTable({ status, assignedAgentId, unassignedOnly }: Ticket
   };
 
   return (
-    <div className="rounded-lg border">
+    <div className="rounded-lg border" data-demo="tickets-table">
       <Table>
         <TableHeader>
           <TableRow>
@@ -51,8 +54,13 @@ export function TicketsTable({ status, assignedAgentId, unassignedOnly }: Ticket
           </TableRow>
         </TableHeader>
         <TableBody>
-          {tickets.map((ticket) => (
-            <TableRow key={ticket._id} className="cursor-pointer hover:bg-muted/50" onClick={() => router.push(`/tickets/${ticket._id}`)}>
+          {tickets.map((ticket, index) => (
+            <TableRow
+              key={ticket._id}
+              data-demo={index === 0 ? "primary-ticket-row" : undefined}
+              className="cursor-pointer hover:bg-muted/50"
+              onClick={() => router.push(withPreservedDemoQuery(`/tickets/${ticket._id}`, searchParams))}
+            >
               <TableCell>
                 <div className="font-medium text-sm">{ticket.title}</div>
                 <div className="text-xs text-muted-foreground">#{ticket._id.slice(-6)}</div>

@@ -5,10 +5,10 @@ import { api } from "../../convex/_generated/api";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import { LayoutDashboard, Ticket, BookOpen, Clock, AlertTriangle, FolderTree, Tags, Shield, ScrollText, Bell, Users } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { NotificationBell } from "./notification-bell";
 import { UserButton } from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
+import { withPreservedDemoQuery } from "@/lib/demo";
 
 const overviewItems = [
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -29,6 +29,7 @@ const adminItems = [
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const user = useQuery(api.users.getCurrentUser);
   const isStaff = user?.role !== "Requester";
   const isAdmin = user?.role === "Admin";
@@ -42,7 +43,7 @@ export function AppSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 isActive={pathname === item.href || pathname.startsWith(item.href + "/")}
-                render={<Link href={item.href} />}
+                render={<Link href={withPreservedDemoQuery(item.href, searchParams)} />}
               >
                 <item.icon className="h-4 w-4" />
                 <span>{item.title}</span>
@@ -57,7 +58,7 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader className="p-4">
-        <Link href="/dashboard" className="flex items-center gap-2 font-bold text-lg text-primary">
+        <Link href={withPreservedDemoQuery("/dashboard", searchParams)} className="flex items-center gap-2 font-bold text-lg text-primary">
           <Ticket className="h-6 w-6" />
           HelpPilot
         </Link>
