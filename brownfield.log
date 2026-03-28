@@ -1,0 +1,15 @@
+Run complete — 26/26 steps completed, 0 failures.
+
+**Summary of what was built:**
+
+1. **`convex/ai.ts`** — Shared OpenRouter API infrastructure with `callOpenRouter` helper and 4 Convex actions: `triageTicket`, `suggestResolutions`, `draftResponse`, `generateKbArticle`
+
+2. **Auto-Triage AI** (`ai-triage-suggestions.tsx`) — Shows on Open/Triaged tickets for staff. AI analyzes title + description and suggests category, priority, tags, and agent assignment. Staff can accept all suggestions with one click or dismiss.
+
+3. **Resolution Suggester** (`resolution-suggester.tsx`) — Shows on non-closed tickets for staff. Searches resolved tickets and published KB articles for similar content, returns top 3 solutions with relevance scores.
+
+4. **Auto-Response Drafter** (`auto-response-drafter.tsx`) — Shows alongside Resolution Suggester. Generates a professional initial response that agents can edit before sending as a reply.
+
+5. **KB Article Generator** (`kb-article-generator.tsx`) — Shows on Resolved tickets for staff. Generates a structured KB article draft (problem, symptoms, root cause, solution steps, prevention tips) from the ticket conversation, saveable as a Draft article.
+
+**Modified files:** `convex/tickets.ts` (added `searchResolved` query), `convex/ticketReplies.ts` (added `getConversation` query), `tickets/[id]/page.tsx` (wired in all 4 AI components).
